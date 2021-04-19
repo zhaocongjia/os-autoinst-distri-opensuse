@@ -27,6 +27,7 @@ sub run {
 
     send_key "alt-f10";    # maximize window
     assert_screen 'evince-open-pdf', 5;
+    sleep 1000;
     send_key "ctrl-w";     # close evince
 }
 
