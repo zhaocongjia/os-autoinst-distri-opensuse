@@ -47,6 +47,8 @@ sub logout_and_login {
     my $test_user = $login_user // $username;
     my $test_pw   = $login_pw   // $newpwd;
     handle_logout;
+    wait_still_screen;
+    mouse_set(0, 0);
     send_key_until_needlematch 'displaymanager', 'esc', 9, 10;
     mouse_hide();
     wait_still_screen;
