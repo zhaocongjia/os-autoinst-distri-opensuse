@@ -198,7 +198,8 @@ sub handle_login {
 
     wait_still_screen();
     save_screenshot();
-    mouse_drag(startx => 400, starty => 400, endx => 20, endy => 20);
+    #mouse_drag(startx => 400, starty => 400, endx => 20, endy => 20);
+    mouse_set(100,100);
     save_screenshot();
     # wait for DM, avoid screensaver and try to login
     # Previously this pressed esc, but that makes the text field in SDDM lose focus
