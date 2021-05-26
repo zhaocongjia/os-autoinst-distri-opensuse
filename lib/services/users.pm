@@ -49,7 +49,7 @@ sub logout_and_login {
     handle_logout;
     wait_still_screen;
     save_screenshot;
-    mouse_drag(startx => 100, starty => 100, endx => 10, endy => 10);
+    mouse_drag(startx => 400, starty => 400, endx => 20, endy => 20);
     save_screenshot;
     send_key_until_needlematch 'displaymanager', 'esc', 9, 10;
     mouse_hide();
