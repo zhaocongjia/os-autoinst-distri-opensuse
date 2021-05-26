@@ -196,9 +196,10 @@ sub handle_login {
     $myuser        //= $username;
     $user_selected //= 0;
 
-    save_screenshot();
     wait_still_screen();
-    mouse_drag(startx => 100, starty => 100, endx => 0, endy => 0);
+    save_screenshot();
+    mouse_drag(startx => 100, starty => 100, endx => 10, endy => 10);
+    save_screenshot();
     # wait for DM, avoid screensaver and try to login
     # Previously this pressed esc, but that makes the text field in SDDM lose focus
     send_key_until_needlematch('displaymanager', 'shift', 30, 3);

@@ -48,7 +48,9 @@ sub logout_and_login {
     my $test_pw   = $login_pw   // $newpwd;
     handle_logout;
     wait_still_screen;
-    mouse_set(0, 0);
+    save_screenshot;
+    mouse_drag(startx => 100, starty => 100, endx => 10, endy => 10);
+    save_screenshot;
     send_key_until_needlematch 'displaymanager', 'esc', 9, 10;
     mouse_hide();
     wait_still_screen;
