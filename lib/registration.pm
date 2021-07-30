@@ -497,6 +497,8 @@ sub process_scc_register_addons {
         # start addons/modules registration, it needs longer time if select multiple or all addons/modules
         my $counter = ADDONS_COUNT;
         my @needles = qw(import-untrusted-gpg-key nvidia-validation-failed yast_scc-pkgtoinstall yast-scc-emptypkg inst-addon contacting-registration-server refreshing-repository system-probing);
+        # Ignore the error about nvidia repo is missing
+        push @needles, 'nvidia-repo-missing' if is_sle('15-SP4+');
         if (is_sle('15-SP2+')) {
             # In SLE 15 SP2 multipath detection happens directly after registration, so using it to detect that all pop-up are processed
             push @needles, 'enable-multipath' if get_var('MULTIPATH');
@@ -509,6 +511,12 @@ sub process_scc_register_addons {
             assert_screen([@needles], 90);
             if (match_has_tag('import-untrusted-gpg-key')) {
                 handle_untrusted_gpg_key;
+                next;
+            }
+            elsif (match_has_tag('nvidia-repo-missing')) {
+                @needles = grep { $_ ne 'nvidia-repo-missing' } @needles;
+                send_key $cmd{ok};
+                send_key $cmd{next};
                 next;
             }
             elsif (match_has_tag('nvidia-validation-failed')) {
@@ -600,11 +608,19 @@ sub fill_in_registration_data {
         push @tags, 'inst-addon' if is_sle('15+') && is_upgrade;
         # Repo key expired bsc#1180619
         push @tags, 'expired-gpg-key' if is_sle('=15');
+        # Ignore the error about nvidia repo is missing
+        push @tags, 'nvidia-repo-missing' if is_sle('15-SP4+');
         while ($counter--) {
             die 'Registration repeated too much. Check if SCC is down.' if ($counter eq 1);
             assert_screen(\@tags, timeout => 360);
             if (match_has_tag('import-untrusted-gpg-key')) {
                 handle_untrusted_gpg_key;
+                next;
+            }
+            elsif (match_has_tag('nvidia-repo-missing')) {
+                @tags = grep { $_ ne 'nvidia-repo-missing' } @tags;
+                send_key $cmd{ok};
+                send_key $cmd{next};
                 next;
             }
             elsif (match_has_tag('nvidia-validation-failed')) {

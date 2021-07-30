@@ -166,6 +166,8 @@ sub run {
     push(@needles, 'inst-bootmenu') if (check_var('ARCH', 'aarch64') && get_var('UPGRADE'));
     # If we have an encrypted root or boot volume, we reboot to a grub password prompt.
     push(@needles, 'encrypted-disk-password-prompt') if get_var("ENCRYPT_ACTIVATE_EXISTING");
+    # Ignore the error about nvidia repo is missing
+    push @needles, 'nvidia-repo-missing' if is_sle('15-SP4+');
     # Kill ssh proactively before reboot to avoid half-open issue on zVM, do not need this on zKVM
     prepare_system_shutdown if check_var('BACKEND', 's390x');
     my $postpartscript = 0;
@@ -193,6 +195,12 @@ sub run {
         elsif (match_has_tag('import-untrusted-gpg-key')) {
             handle_untrusted_gpg_key;
             @needles = grep { $_ ne 'import-untrusted-gpg-key' } @needles;
+            next;
+        }
+        elsif (match_has_tag('nvidia-repo-missing')) {
+            @needles = grep { $_ ne 'nvidia-repo-missing' } @needles;
+            send_key $cmd{ok};
+            send_key $cmd{next};
             next;
         }
         elsif (match_has_tag('prague-pxe-menu') || match_has_tag('qa-net-selection')) {
