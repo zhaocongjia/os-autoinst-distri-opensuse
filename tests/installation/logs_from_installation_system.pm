@@ -41,6 +41,12 @@ sub run {
             die "IPL device was not set correctly";
         }
     }
+
+    script_run("mount /dev/vda1 /mnt");
+    script_run("cat /mnt/etc/gdm/custom.conf");
+    script_run("sed -i s/#Enable=true/Enable=true/ /mnt/etc/gdm/custom.conf");
+    script_run("umount /mnt");
+
     # while technically SUT has a different network than the BMC
     # we require ssh installation anyway
     if (get_var('BACKEND', '') =~ /ipmi|spvm/) {
