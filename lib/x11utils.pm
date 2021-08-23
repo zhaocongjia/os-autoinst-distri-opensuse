@@ -236,6 +236,12 @@ sub handle_login {
     assert_screen([qw(generic-desktop gnome-activities opensuse-welcome)], 180);
     if (match_has_tag('gnome-activities')) {
         send_key('esc');
+        check_screen('generic-desktop');
+        sleep(10);
+        send_key('esc');
+        check_screen('generic-desktop');
+        send_key('esc');
+        check_screen('generic-desktop');
         assert_screen([qw(generic-desktop opensuse-welcome)]);
     }
 }
