@@ -233,7 +233,8 @@ sub handle_login {
     assert_screen 'displaymanager-password-prompt';
     type_password($mypwd);
     send_key 'ret';
-    wait_still_screen;
+    # This is first boot, so wait longer for a still screen.
+    wait_still_screen(30);
     # for S390x testing, since they are not using qemu built-in vnc, it is
     # expected that polkit authentication window can open for first time login.
     # see bsc#1177446 for more information.
