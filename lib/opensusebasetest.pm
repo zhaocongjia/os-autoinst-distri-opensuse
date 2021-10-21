@@ -1020,10 +1020,10 @@ sub wait_boot_past_bootloader {
         return;
     }
 
-    diag(get_var("NOAUTOLOGIN"));
-    diag(get_var("XDMUSED"));
-    diag($nologin);
-    diag($forcenologin);
+    diag('noautologin' . get_var("NOAUTOLOGIN"));
+    diag('xdmused' . get_var("XDMUSED"));
+    diag('nologin' . $nologin);
+    diag('forcenologin' . $forcenologin);
     $self->handle_displaymanager_login(ready_time => $ready_time, nologin => $nologin) if (get_var("NOAUTOLOGIN") || get_var("XDMUSED") || $nologin || $forcenologin);
     return if $args{nologin};
 
