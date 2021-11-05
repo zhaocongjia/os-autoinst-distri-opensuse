@@ -24,6 +24,7 @@ use services::registered_addons 'full_registered_check';
 use List::MoreUtils 'uniq';
 use strict;
 use warnings;
+use x11utils 'turn_off_gnome_screensaver_for_gdm';
 
 sub run {
     my ($self) = @_;
@@ -95,6 +96,8 @@ sub run {
 
     # stop and disable PackageKit
     quit_packagekit;
+
+    turn_off_gnome_screensaver_for_gdm if check_var('DESKTOP', 'gnome');
 }
 
 sub test_flags {
