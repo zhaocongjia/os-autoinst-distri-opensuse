@@ -18,6 +18,8 @@ sub run {
 
     select_console 'root-console';
 
+    script_run 'sudo -u gdm dbus-launch gsettings set org.gnome.desktop.session idle-delay 0';
+
     install_services($default_services)
       if is_sle
       && !is_desktop
