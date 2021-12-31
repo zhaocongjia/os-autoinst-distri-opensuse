@@ -14,6 +14,7 @@ use x11utils 'handle_relogin';
 
 sub run {
     select_console 'root-console';
+    script_run('sed -i s/#Enable=true/Enable=true/g /etc/gdm/custom.conf');
     enter_cmd("journalctl -f > /dev/hvc0");
     select_console 'x11';
     handle_relogin;
