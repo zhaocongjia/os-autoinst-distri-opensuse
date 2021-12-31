@@ -13,6 +13,9 @@ use testapi;
 use x11utils 'handle_relogin';
 
 sub run {
+    select_console 'root-console';
+    enter_cmd("journalctl -f > /dev/hvc0");
+    select_console 'x11';
     handle_relogin;
 }
 
