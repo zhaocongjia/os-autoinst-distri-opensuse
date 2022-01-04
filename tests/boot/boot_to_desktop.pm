@@ -17,6 +17,7 @@ use testapi;
 use Utils::Architectures;
 use Utils::Backends;
 use version_utils qw(is_upgrade is_sles4sap is_sle);
+use x11test;
 
 sub run {
     my ($self) = @_;
@@ -50,6 +51,7 @@ sub run {
     else {
         $self->wait_boot(bootloader_time => $timeout, nologin => $nologin);
     }
+    unlock_user_settings;
 }
 
 sub test_flags {
