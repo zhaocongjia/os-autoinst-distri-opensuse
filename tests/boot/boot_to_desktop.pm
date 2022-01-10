@@ -52,7 +52,8 @@ sub run {
     }
     select_console 'root-console';
     script_run('sed -i s/#Enable=true/Enable=true/g /etc/gdm/custom.conf');
-    script_run('sed -i s/WaylandEnable=true/WaylandEnable=false/g /etc/gdm/custom.conf');
+    script_run('sed -i s/#WaylandEnable=false/WaylandEnable=false/g /etc/gdm/custom.conf');
+    script_run('cat /etc/gdm/custom.conf');
     select_console 'x11';
 }
 
