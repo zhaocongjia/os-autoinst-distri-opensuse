@@ -27,10 +27,6 @@ use warnings;
 
 sub run {
     my ($self) = @_;
-
-    sleep 30;
-    select_console 'log-console';
-    sleep 10;
     select_console 'root-console';
 
     ensure_serialdev_permissions;
