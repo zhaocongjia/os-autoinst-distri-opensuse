@@ -45,7 +45,7 @@ sub connect_to_network {
     # select 'wifi 1' (The one not beeing ignored by NM)
     assert_and_click 'gnome_widget-network_selection-click';
     # click on 'select network'
-    assert_and_click 'gnome_widget-network_search-click';
+    assert_and_click 'gnome_widget-network_search-click2';
     # check if our self created wifi is available
     assert_screen 'gnome_widget-network_found_networks';
     # select it
