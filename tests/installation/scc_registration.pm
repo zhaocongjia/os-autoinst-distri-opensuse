@@ -23,6 +23,7 @@ sub run {
         record_info('SCC reg.', 'SCC registration');
         assert_registration_screen_present();
         fill_in_registration_data();
+        wait_still_screen();
         handle_scc_popups();
     }
     else {
