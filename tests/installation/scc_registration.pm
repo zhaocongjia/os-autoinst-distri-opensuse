@@ -15,7 +15,7 @@ use parent "y2_installbase";
 use testapi;
 use utils 'assert_screen_with_soft_timeout';
 use version_utils 'is_sle';
-use registration qw(skip_registration assert_registration_screen_present fill_in_registration_data verify_scc investigate_log_empty_license);
+use registration qw(skip_registration assert_registration_screen_present fill_in_registration_data verify_scc investigate_log_empty_license handle_scc_popups);
 
 sub run {
     return record_info('Skip reg.', 'SCC registration is not required in media based upgrade since SLE15') if (is_sle('15+') && get_var('MEDIA_UPGRADE'));
@@ -23,6 +23,7 @@ sub run {
         record_info('SCC reg.', 'SCC registration');
         assert_registration_screen_present();
         fill_in_registration_data();
+        handle_scc_popups();
     }
     else {
         return if check_var('SLE_PRODUCT', 'leanos');
