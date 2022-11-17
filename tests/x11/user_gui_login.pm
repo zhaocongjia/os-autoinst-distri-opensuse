@@ -13,6 +13,22 @@ use testapi;
 use x11utils 'handle_relogin';
 
 sub run {
+    select_console 'root-console';
+    script_run('sed -i s/#Enable=true/Enable=true/g /etc/gdm/custom.conf');
+
+    select_console 'x11';
+    handle_relogin;
+
+    select_console 'x11';
+    handle_relogin;
+
+    select_console 'x11';
+    handle_relogin;
+
+    select_console 'x11';
+    handle_relogin;
+
+    select_console 'x11';
     handle_relogin;
 }
 
