@@ -40,11 +40,15 @@ sub dl_location_switch {
     my ($self, $tg) = @_;
 
     $self->firefox_preferences;
+    assert_and_click('firefox-preferences-search');
+    enter_cmd "always ask";
     if ($tg ne "ask") {
-        send_key "alt-shift-v";    #"Save files to Downloads"
+        assert_and_click('firefox-preferences-disable-asktosave');    #"Save files to Downloads"
+        send_key 'ctrl-w';
     }
     else {
-        send_key "alt-shift-a";    #"Always ask me where to save files"
+        assert_and_click('firefox-preferences-enable-asktosave');    #"Always ask me where to save files"
+        send_key 'ctrl-w';
     }
 }
 
