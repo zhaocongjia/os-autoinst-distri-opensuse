@@ -30,11 +30,15 @@ sub application_test {
 sub run {
     my ($self) = @_;
 
+    x11_start_program('xterm');
     assert_script_sudo 'sed -i -e "$aEnvironment=SYSTEMD_LOG_LEVEL=debug" /usr/lib/systemd/system/systemd-logind.service';
     assert_script_sudo "zypper in -y evtest";
+    enter_cmd "exit";
     power_action('reboot');
     $self->wait_boot(bootloader_time => 300);
+    x11_start_program('xterm');
     assert_script_sudo 'bash -c "systemd-cat evtest /dev/input/event0 &"';
+    enter_cmd "exit";
 
     $self->prepare_sle_classic;
     $self->application_test;
