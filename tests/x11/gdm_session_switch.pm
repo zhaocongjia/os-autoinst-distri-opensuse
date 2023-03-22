@@ -31,7 +31,7 @@ sub run {
     my ($self) = @_;
 
     x11_start_program('xterm');
-    assert_script_sudo 'sed -i -e "$aEnvironment=SYSTEMD_LOG_LEVEL=debug" /usr/lib/systemd/system/systemd-logind.service';
+    assert_script_sudo q{sed -i -e '$aEnvironment=SYSTEMD_LOG_LEVEL=debug' /usr/lib/systemd/system/systemd-logind.service};
     assert_script_sudo "zypper in -y evtest";
     enter_cmd "exit";
     power_action('reboot');
