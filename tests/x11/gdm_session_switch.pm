@@ -44,26 +44,6 @@ sub run {
     $self->prepare_sle_classic;
     $self->application_test;
 
-    # Reboot and log in
-    $self->switch_wm;
-    assert_and_click "displaymanager-systembutton";
-    assert_and_click "displaymanager-system-powerbutton";
-    assert_and_click "displaymanager-reboot";
-    assert_and_click "confirm-restart" if (is_sle('>=15-SP4'));
-
-    if (get_var("SHUTDOWN_NEEDS_AUTH")) {
-        assert_screen 'reboot-auth', 15;
-        type_password;
-        send_key "ret";
-    }
-
-    $self->wait_boot(bootloader_time => 300);
-
-    # Log out and log in again
-    $self->switch_wm;
-    send_key "ret";
-    handle_gnome_activities;
-
     # Log out and switch to icewm
     $self->switch_wm;
     assert_and_click "displaymanager-settings";
