@@ -37,11 +37,9 @@ sub run {
     assert_script_run "rpm -i evtest-1.33-1.19.x86_64.rpm";
     enter_cmd "reboot";
     $self->wait_boot(bootloader_time => 300);
-    x11_start_program('xterm');
-    become_root;
-    enter_cmd "nohup systemd-cat evtest /dev/input/event0 &";
-    enter_cmd "exit";
-    enter_cmd "exit";
+    select_console('log-console', timeout => 180);
+    enter_cmd "systemd-cat evtest /dev/input/event0 &";
+    select_console('x11');
 
     $self->prepare_sle_classic;
     $self->application_test;
