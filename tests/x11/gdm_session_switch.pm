@@ -38,7 +38,9 @@ sub run {
     enter_cmd "reboot";
     $self->wait_boot(bootloader_time => 300);
     x11_start_program('xterm');
-    assert_script_sudo 'bash -c "systemd-cat evtest /dev/input/event0 &"';
+    become_root;
+    enter_cmd "systemd-cat evtest /dev/input/event0 &";
+    enter_cmd "exit";
     enter_cmd "exit";
 
     $self->prepare_sle_classic;
