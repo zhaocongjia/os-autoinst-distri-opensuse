@@ -39,7 +39,7 @@ sub run {
     $self->wait_boot(bootloader_time => 300);
     x11_start_program('xterm');
     become_root;
-    enter_cmd "systemd-cat evtest /dev/input/event0 &";
+    enter_cmd "nohup systemd-cat evtest /dev/input/event0 &";
     enter_cmd "exit";
     enter_cmd "exit";
 
