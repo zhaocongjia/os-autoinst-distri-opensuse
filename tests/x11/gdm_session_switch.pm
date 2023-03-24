@@ -35,7 +35,7 @@ sub run {
     assert_script_run q{sed -i -e '$aEnvironment=SYSTEMD_LOG_LEVEL=debug' /usr/lib/systemd/system/systemd-logind.service};
     assert_script_run "wget http://dist.suse.de/install/SLP/SLE-15-SP5-Module-Development-Tools-LATEST/x86_64/DVD1/x86_64/evtest-1.33-1.19.x86_64.rpm";
     assert_script_run "rpm -i evtest-1.33-1.19.x86_64.rpm";
-    script_run('sed -i s/#Enable=true/Enable=true/g /etc/gdm/custom.conf')
+    script_run('sed -i s/#Enable=true/Enable=true/g /etc/gdm/custom.conf');
     enter_cmd "reboot";
     $self->wait_boot(bootloader_time => 300);
     select_console('log-console', timeout => 180);
