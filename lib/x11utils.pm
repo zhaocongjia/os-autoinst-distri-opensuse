@@ -342,6 +342,7 @@ First logs out and the log in via C<handle_logout()> and C<handle_login()>
 
 sub handle_relogin {
     handle_logout;
+    sleep(60);
     handle_login;
 }
 
