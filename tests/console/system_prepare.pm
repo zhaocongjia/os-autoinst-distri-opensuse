@@ -40,7 +40,7 @@ sub run {
         # poo#87850 wait the zypper processes in background to finish and release the lock.
         wait_quit_zypper;
     }
-
+    script_run('sed -i s/#Enable=true/Enable=true/g /etc/gdm/custom.conf');
     # Register the modules after media migration, so it can do regession
     if (get_var('MEDIA_UPGRADE') && get_var('DO_REGISTRY')) {
         add_suseconnect_product(uc get_var('SLE_PRODUCT'), undef, undef, "-r " . get_var('SCC_REGCODE') . " --url " . get_var('SCC_URL'), 300, 1);
