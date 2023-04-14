@@ -302,7 +302,18 @@ sub handle_login {
     send_key 'ret';
     wait_still_screen;
     handle_additional_polkit_windows($mypwd) if check_screen([qw(authentication-required-user-settings authentication-required-modify-system)], 15);
-    assert_screen([qw(generic-desktop gnome-activities opensuse-welcome)], 180);
+    save_screenshot();
+    sleep(20);
+    save_screenshot();
+    sleep(20);
+    save_screenshot();
+    sleep(20);
+    save_screenshot();
+    sleep(20);
+    save_screenshot();
+    sleep(20);
+    save_screenshot();
+    assert_screen([qw(generic-desktop gnome-activities opensuse-welcome)], 120);
     if (match_has_tag('gnome-activities')) {
         send_key_until_needlematch [qw(generic-desktop opensuse-welcome)], 'esc', 5, 10;
     }
