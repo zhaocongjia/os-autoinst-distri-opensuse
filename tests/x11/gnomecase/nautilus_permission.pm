@@ -43,6 +43,7 @@ sub run {
     assert_and_click 'nautilus-default-other-access-permission';
     assert_and_click 'nautilus-read-write-permission';
     send_key "esc";    #close the dialog
+    send_key "esc";    #need a second "esc" since GNOME 45
                        #reopen the properties menu to check if the changes kept
     if (is_sle('15+') || is_leap('15.0+') || is_tumbleweed) {
         assert_and_click('nautilus-newfile-matched', button => 'right');
