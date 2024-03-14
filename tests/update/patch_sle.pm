@@ -232,7 +232,7 @@ sub run {
     my ($self) = @_;
 
     $self->setup_sle();
-    type_string "sed -i -e 's|url.*de|url: https://scc.suse.com|' /etc/SUSEConnect";
+    type_string "sed -i -e 's|url.*de|url: https://scc.suse.com|' /etc/SUSEConnect\n";
     save_screenshot;
     $self->patching_sle();
 }
