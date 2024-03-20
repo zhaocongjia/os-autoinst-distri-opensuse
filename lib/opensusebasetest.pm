@@ -654,6 +654,17 @@ sub grub_select {
 
         if (match_has_tag 'grub2') {
             send_key 'ret';
+            sleep(1);
+            save_screenshot;
+            send_key 'v';
+            sleep(1);
+            save_screenshot;
+            send_key '^';
+            sleep(1);
+            save_screenshot;
+            send_key 'ret';
+            sleep(1);
+            save_screenshot;
         }
     }
     elsif (!get_var('S390_ZKVM')) {
