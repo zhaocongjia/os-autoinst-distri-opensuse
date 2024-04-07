@@ -6,6 +6,9 @@
       <final_restart_services config:type="boolean">
       false
     </final_restart_services>
+  <activate_systemd_default_target config:type="boolean">
+   false
+  </activate_systemd_default_target>
     </mode>
     <ask-list config:type="list">
       <ask>
