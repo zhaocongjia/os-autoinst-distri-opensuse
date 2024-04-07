@@ -61,6 +61,9 @@ sub run {
         x11_start_program('xterm');
         turn_off_gnome_screensaver;    # Disable screensaver
         turn_off_low_disk_warning;
+        enter_cmd("wget " . autoinst_url . "/data/HANA.xml");
+        enter_cmd("cp HANA.xml /usr/share/YaST2/data/y2sap/HANA.xml");
+        save_screenshot;
         enter_cmd "killall xterm";
         assert_screen 'generic-desktop';
         x11_start_program('yast2 sap-installation-wizard', target_match => 'sap-installation-wizard');
