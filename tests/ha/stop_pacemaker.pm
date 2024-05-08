@@ -16,6 +16,7 @@ use Utils::Systemd qw(systemctl);
 sub run {
     select_console("root-console");
     systemctl 'stop pacemaker';
+    systemctl 'stop sbd';
 }
 
 1;
