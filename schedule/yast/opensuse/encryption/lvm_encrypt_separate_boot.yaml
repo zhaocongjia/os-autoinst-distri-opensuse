@@ -39,7 +39,7 @@ schedule:
   - console/force_scheduled_tasks
   - shutdown/grub_set_bootargs
   - console/validate_lvm
-  - console/validate_encrypt
+  - shutdown/shutdown
 test_data:
   disks:
   - name: vda
