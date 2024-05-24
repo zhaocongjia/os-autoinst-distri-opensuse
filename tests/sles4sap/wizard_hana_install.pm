@@ -42,6 +42,7 @@ sub run {
     # NOTE: fix name is used here (Dell), but something more flexible should be done later!
     enter_cmd "rm -f /usr/share/YaST2/data/y2sap//hana_partitioning_Dell*.xml";
     enter_cmd "ln -s hana_partitioning.xml '/usr/share/YaST2/data/y2sap/hana_partitioning_Dell Inc._generic.xml'";
+    sleep 1;
 
     # Add host's IP to /etc/hosts
     $self->add_hostname_to_hosts;
