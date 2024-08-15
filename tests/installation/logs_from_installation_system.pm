@@ -82,7 +82,7 @@ sub run {
     # We don't change network setup here, so should work
     # We don't parse logs unless it's detect_yast2_failures scenario
     $self->save_upload_y2logs(no_ntwrk_recovery => 1, skip_logs_investigation => !get_var('ASSERT_Y2LOGS'));
-    select_console 'installation' unless get_var('REMOTE_CONTROLLER');
+    enter_cmd 'poweroff\n';
 }
 
 sub test_flags {
