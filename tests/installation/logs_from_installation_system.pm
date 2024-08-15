@@ -82,7 +82,7 @@ sub run {
     # We don't change network setup here, so should work
     # We don't parse logs unless it's detect_yast2_failures scenario
     $self->save_upload_y2logs(no_ntwrk_recovery => 1, skip_logs_investigation => !get_var('ASSERT_Y2LOGS'));
-    enter_cmd 'poweroff\n';
+    enter_cmd 'poweroff';
 }
 
 sub test_flags {
