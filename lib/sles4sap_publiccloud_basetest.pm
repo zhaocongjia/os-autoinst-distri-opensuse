@@ -63,6 +63,7 @@ sub post_fail_hook {
         return;
     }
     qesap_cluster_logs();
+    upload_logs('/var/tmp/ssh_sut.log', failok => 1, log_name => 'ssh_sut_log.txt');
     eval { $self->cleanup(); } or bmwqemu::fctwarn("self::cleanup() failed -- $@");
 }
 
