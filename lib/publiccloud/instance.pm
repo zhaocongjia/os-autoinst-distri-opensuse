@@ -348,11 +348,11 @@ sub wait_for_guestregister {
 
     wait_for_ssh([timeout => 600] [, proceed_on_failure => 0] [, ...])
 
-When a remote pc instance starting, by default wait_stop param.=0(false) and 
+When a remote pc instance is starting, by default wait_stop param.=0(false) and
 this routine checks until the SSH port of the remote instance is reachable and open. 
 Then by default also checks that system is up, unless systemup_check false/0.
 
-Wnen a remote pc instance is stopping in shutdown, we set input param. wait_stop=1(true),
+When a remote pc instance is stopping in shutdown, we set input param. wait_stop=1(true),
 to expect until ssh is closed; automatic defaults systemup_check=0 and proceed_on_failure=1 applied.
 Status values of exit_code: 0 = pass; 1 = fail; 2 = fail,but retry,till timeout or valid outcome.
 
@@ -416,7 +416,7 @@ sub wait_for_ssh {
         while (($duration = time() - $start_time) < $args{timeout}) {
             # timeout recalculated removing consumed time until now
             # We don't support password authentication so it would just block the terminal
-            $sysout = $self->ssh_script_output(cmd => 'sudo systemctl is-system-running', ssh_opts => '-o PasswordAuthentication=no ' . $self->ssh_opts,
+            $sysout = $self->run_ssh_command(cmd => 'sudo systemctl is-system-running', ssh_opts => '-o PasswordAuthentication=no ' . $self->ssh_opts,
                 timeout => $args{timeout} - $duration, proceed_on_failure => 1, username => $args{username});
             # result check
             if ($sysout =~ m/initializing|starting/) {    # still starting
