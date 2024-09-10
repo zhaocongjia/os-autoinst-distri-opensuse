@@ -371,10 +371,11 @@ sub stop_hana {
         $self->{my_instance}->run_ssh_command(cmd => "sudo su -c sync", timeout => "0", %args);
         # Close SSH mux file before Crash test
         $self->{my_instance}->run_ssh_command(cmd => " ", timeout => "0", ssh_opts => "-O exit");
+        script_run "sed -i ~/.ssh/config -e 's/ControlMaster auto/ControlMaster no/'";
         $self->{my_instance}->run_ssh_command(cmd => 'sudo su -c "' . $cmd . '"',
             timeout => "0",
             # Try only extending ssh_opts
-            ssh_opts => "-o ServerAliveInterval=2 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=ERROR",
+            ssh_opts => "-o ServerAliveInterval=2",
             %args);
         # It is better to wait till ssh disappear
         record_info("Wait ssh disappear start");
