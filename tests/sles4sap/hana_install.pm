@@ -260,6 +260,7 @@ sub run {
       "--logpath=$mountpts{hanalog}->{mountpt}/$sid",
       "--sapmnt=$mountpts{hanashared}->{mountpt}";
       "--secure_store=ssfs";
+      "--lss_user_password=$sles4sap::instance_password";
     push @hdblcm_args, "--pmempath=$pmempath", "--use_pmem" if get_var('NVDIMM');
     push @hdblcm_args, "--component_dirs=/sapinst/" . get_var('HDB_CLIENT_LINUX') if get_var('HDB_CLIENT_LINUX');
 
