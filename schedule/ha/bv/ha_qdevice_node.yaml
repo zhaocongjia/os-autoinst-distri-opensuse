@@ -53,6 +53,10 @@ schedule:
   - '{{boot}}'
   - ha/check_after_reboot
 conditional_schedule:
+  barrier_init:
+    HA_CLUSTER_INIT:
+      yes:
+        - ha/barrier_init
   cluster_setup:
     HA_CLUSTER_INIT:
       yes:
