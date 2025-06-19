@@ -33,7 +33,9 @@ vars:
   QDEVICE_TEST_ROLE: qnetd_server
   USE_SUPPORT_SERVER: "1"
 schedule:
-  - boot/boot_to_desktop
+  - installation/bootloader
+  - installation/agama_reboot
+  - installation/first_boot
   - console/system_prepare
   - console/consoletest_setup
   - console/check_os_release

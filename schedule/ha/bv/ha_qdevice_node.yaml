@@ -38,8 +38,10 @@ vars:
   QEMU_DISABLE_SNAPSHOTS: "1"
   USE_SUPPORT_SERVER: "1"
 schedule:
-  - boot/boot_to_desktop
-  - ha/wait_barriers
+  - '{{barrier_init}}'
+  - installation/bootloader
+  - installation/agama_reboot
+  - installation/first_boot
   - console/system_prepare
   - console/consoletest_setup
   - console/check_os_release
