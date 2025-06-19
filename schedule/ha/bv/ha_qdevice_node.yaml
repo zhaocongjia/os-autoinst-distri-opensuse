@@ -32,8 +32,6 @@ vars:
   QDEVICE: "1"
   # qdevice test role is client in the cluster nodes and qnetd_server in the server
   QDEVICE_TEST_ROLE: client
-  # Disable qemu snapshots to avoid unexpected fences in HA tests
-  USE_SUPPORT_SERVER: "1"
 schedule:
   - '{{barrier_init}}'
   - installation/bootloader
