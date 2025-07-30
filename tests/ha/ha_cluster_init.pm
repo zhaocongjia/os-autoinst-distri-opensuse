@@ -69,6 +69,7 @@ sub run {
     # Qdevice configuration
     if (get_var('QDEVICE')) {
         zypper_call 'in corosync-qdevice';
+        zypper_call 'in crmsh';
         my $qnet_node_host = choose_node(3);
         $qdevice_opt = "--qnetd-hostname=" . get_ip($qnet_node_host);
         barrier_wait("QNETD_SERVER_READY_$cluster_name");
