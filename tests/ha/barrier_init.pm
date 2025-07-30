@@ -38,8 +38,8 @@ sub run {
             mutex_create($_) foreach ('iscsi', 'support_server_ready');
             barrier_create("BARRIER_HA_$cluster_name", $num_nodes);
             barrier_create("BARRIER_HA_NFS_SUPPORT_DIR_SETUP_$cluster_name", $num_nodes+1);
-            barrier_create("BARRIER_HA_HOSTS_FILES_READY_$cluster_name", $num_nodes);
-            barrier_create("BARRIER_HA_LUNS_FILES_READY_$cluster_name", $num_nodes);
+            barrier_create("BARRIER_HA_HOSTS_FILES_READY_$cluster_name", $num_nodes+1);
+            barrier_create("BARRIER_HA_LUNS_FILES_READY_$cluster_name", $num_nodes+1);
             barrier_create("BARRIER_HA_NONSS_FILES_SYNCED_$cluster_name", $num_nodes);
         }
         else {
