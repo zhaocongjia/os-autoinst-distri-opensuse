@@ -59,4 +59,5 @@ conditional_schedule:
   boot:
     HA_CLUSTER_INIT:
       no:
-        - boot/boot_to_desktop
+        - boot/reconnect_mgmt_console
+        - installation/first_boot
