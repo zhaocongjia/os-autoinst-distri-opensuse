@@ -32,6 +32,7 @@ schedule:
   - installation/agama_reboot
   - installation/first_boot
   - console/system_prepare
+  - ha/check_hae_active.py
   - console/consoletest_setup
   - console/check_os_release
   - console/hostname

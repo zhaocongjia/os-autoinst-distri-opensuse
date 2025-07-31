@@ -38,7 +38,6 @@ sub run {
     # Qdevice configuration
     if (get_var('QDEVICE')) {
         zypper_call 'in corosync-qdevice';
-        zypper_call 'in crmsh';
         barrier_wait("QNETD_SERVER_READY_$cluster_name");
     }
 
