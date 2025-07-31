@@ -147,7 +147,7 @@ sub run {
 
     # Create the HA resource
     if (is_node(1)) {
-        assert_script_run "EDITOR=\"sed -ie '\$ a primitive $drbd_rsc ocf:linbit:drbd params drbd_resource=$drbd_rsc'\" crm configure edit";
+        assert_script_run "EDITOR=\"sed -ie '\$ a primitive $drbd_rsc ocf:linbit:drbd params drbd_resource=$drbd_rsc notify=true'\" crm configure edit";
 
         if (is_sle('>=15-SP4')) {
             assert_script_run
