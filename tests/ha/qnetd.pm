@@ -168,6 +168,7 @@ sub run {
 
     # Restart stonith. This should fence node 2
     assert_script_run 'crm configure property stonith-enabled="true"' if is_node(1);
+    assert_script_run "iptables -F && iptables -X" if is_node(1);
 
     barrier_wait("QNETD_SERVER_DONE_$cluster_name");
 
