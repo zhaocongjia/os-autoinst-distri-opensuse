@@ -106,8 +106,8 @@ sub run {
         # is preferred to be given the vote from qnetd.
         assert_script_run "EDITOR=\"sed -ie '\$ a primitive stateful-1 ocf:pacemaker:Stateful'\" crm configure edit";
         assert_script_run "EDITOR=\"sed -ie '\$ a clone promotable-1 stateful-1 meta promotable=true'\" crm configure edit";
-        assert_script_run "crm configure property stonith-watchdog-timeout=84";
-        assert_script_run "crm configure property stonith-timeout=112";
+        assert_script_run "crm configure property stonith-watchdog-timeout=100";
+        assert_script_run "crm configure property stonith-timeout=131";
         save_state;
 
         # Qdevice should be started
