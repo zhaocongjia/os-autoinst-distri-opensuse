@@ -12,7 +12,7 @@
 
 package sles4sap_publiccloud;
 
-use base 'publiccloud::basetest';
+use Mojo::Base 'publiccloud::basetest', -signatures;
 use strict;
 use JSON;
 use warnings FATAL => 'all';
@@ -146,15 +146,8 @@ sub run_cmd {
 =back
 =cut
 
-sub run_cmd_retry {
+sub run_cmd_retry ($timeout = 60, $retry = 3, $delay = 10, $proceed_on_failure = undef) { 
     my ($self, %args) = @_;
-    my $timeout = $args{timeout} // 60;
-    my $retry = $args{retry} // 3;
-    my $delay = $args{delay} // 10;
-    delete($args{timeout});
-    delete($args{retry});
-    delete($args{delay});
-    delete($args{proceed_on_failure});
 
     for (1 .. $retry) {
         my $ret = eval { $self->run_cmd(timeout => $timeout, proceed_on_failure => 0, %args); };
