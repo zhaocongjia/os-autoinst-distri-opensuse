@@ -6,7 +6,7 @@ use Test::Warnings;
 use Test::MockModule;
 use Test::Mock::Time;
 
-use List::Util qw(any none);
+use List::Util qw(any none all);
 
 use testapi 'set_var';
 use sles4sap::qesap::qesapdeployment;
@@ -948,7 +948,7 @@ subtest '[qesap_prepare_env] integration test' => sub {
     qesap_prepare_env(provider => 'DONALDUCK');
 
     note("\n  C-->  " . join("\n  C-->  ", @calls));
-    ok((any { /3/ } @retries), 'default retry times is 3 for qesap_pip_install and qesap_galaxy_install');
+    ok((all { /3/ } @retries), 'default retry times is 3 for qesap_pip_install and qesap_galaxy_install');
 };
 
 subtest '[qesap_prepare_env]' => sub {
