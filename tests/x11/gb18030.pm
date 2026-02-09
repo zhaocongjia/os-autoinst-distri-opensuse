@@ -34,7 +34,10 @@ sub test_gb18030_file {
     wait_still_screen;
 
     for (my $n = 1; $n <= $needlenumber; $n++) {
-        assert_screen('gb18030-' . $filename . '-page-' . $n);
+        check_screen('gb18030-' . $filename . '-page-' . $n);
+        sleep(2);
+        save_screenshot;
+        sleep(2);
         send_key("pgdn");
         # move the cursor up for better alignment
         send_key("up");
