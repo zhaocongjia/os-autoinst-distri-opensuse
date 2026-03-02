@@ -46,7 +46,7 @@ sub run {
 
     # Copy the code to instance
     my $remote = $run_args->{my_instance}->username . '@' . $run_args->{my_instance}->public_ip;
-    $instance->scp("/root/$mr_test_tar", "$remote:/tmp");
+    $instance->scp("/root/$mr_test_tar", "$remote:/tmp", "-q");
     $instance->ssh_assert_script_run("sudo tar zxf /tmp/$mr_test_tar --strip-components 1 -C /root/");
     record_info('Copy mr_test code to instance OK');
 
