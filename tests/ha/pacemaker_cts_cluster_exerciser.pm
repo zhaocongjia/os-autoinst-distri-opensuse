@@ -12,9 +12,10 @@ use Mojo::Base 'haclusterbasetest';
 use Mojo::JSON 'encode_json';
 use lockapi;
 use testapi;
-use utils qw(systemctl zypper_call exec_and_insert_password);
+use utils qw(systemctl exec_and_insert_password);
 use hacluster;
 use version_utils qw(package_version_cmp);
+use package_utils qw(install_package);
 
 sub run {
     my $cts_bin = '/usr/share/pacemaker/tests/cts/CTSlab.py';
@@ -31,7 +32,7 @@ sub run {
     # Wait until Pacemaker cts test is initialized
     barrier_wait("PACEMAKER_CTS_INIT_$cluster_name");
 
-    zypper_call 'in pacemaker-cts';
+    install_package('pacemaker-cts', trup_apply => 1);
     save_screenshot;
     # Get package version
     my $pacemaker_cts_package_version = script_output("rpm -q --qf '%{VERSION}\n' pacemaker-cts");
