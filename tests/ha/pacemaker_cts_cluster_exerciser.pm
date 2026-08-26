@@ -51,19 +51,19 @@ sub run {
 
         # Don't do stonith test since this one reboots a node randomly
         # and it's very difficult to handle in MM scenario.
-        if (package_version_cmp($pacemaker_cts_package_version, '2.1.6') >= 0) {
-            assert_script_run "sed -i '/StonithdTest,/ s/^/#/' \$(rpm -ql pacemaker-cts|grep tests/__init__.py)";
-        }
-        else {
-            assert_script_run "sed -i '/AllTestClasses.append(StonithdTest)/ s/^/#/' \$(rpm -ql pacemaker-cts|grep CTStests.py)";
-        }
+        #if (package_version_cmp($pacemaker_cts_package_version, '2.1.6') >= 0) {
+        #    assert_script_run "sed -i '/StonithdTest,/ s/^/#/' \$(rpm -ql pacemaker-cts|grep tests/__init__.py)";
+        #}
+        #else {
+        #    assert_script_run "sed -i '/AllTestClasses.append(StonithdTest)/ s/^/#/' \$(rpm -ql pacemaker-cts|grep CTStests.py)";
+        #}
 
         # Start pacemaker cts cluster exerciser
         my $cts_start_time = time;
 
         my @cmd_seq = (
             $cts_bin, '--nodes', "'$node_01 $node_02'", '--test-ip-base', $test_ip,
-            '--no-unsafe-tests', '--outputfile', $log, '--once'
+            '--no-unsafe-tests', '--outputfile', $log, '--once', '--disable-fencing'
         );
 
         if (package_version_cmp($pacemaker_cts_package_version, '3.0.1') >= 0) {
